@@ -13,10 +13,11 @@ body {
 
 #map {
   height: 65%;
-  width: 50%;
+  width: 70%;
   margin: 2% auto;
 
   border: 1px solid black;
+  border-radius: 40%;
 }
 
 

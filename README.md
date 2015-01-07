@@ -36,3 +36,6 @@ Boston - 42.3320°N 71.0202°W
 L Vegas - 36.2277°N 115.2640°W
 
 
+should probably add some more after it all works!
+
+
