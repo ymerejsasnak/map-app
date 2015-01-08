@@ -1,25 +1,5 @@
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//google.maps.event.addDomListener(window, 'load', loadMap);
-
-
-
 $(function() {
 
   //city name is obj key, with lat and long in 2 item array as obj property
@@ -38,7 +18,40 @@ $(function() {
     "Las Vegas, NV": [36.2277, -115.2640]
 };
   
-  //create array of city names (taken from citydata keys)
+
+  var currentCity = setupGame(cityData);
+
+ 
+
+
+  //check if button clicked is right or wrong
+  $("button").on("click", function() {
+    //temp right/wrong code using...ugh...alerts
+    if ($(this).text() === currentCity) {
+      alert("correct!");
+
+      //load new map and buttons
+      currentCity = setupGame(cityData);
+      
+
+    }
+    else {
+      alert("wrong!")
+    }
+
+  });
+
+
+
+});
+
+
+
+
+
+
+function setupGame(cityData) {
+   //create array of city names (taken from citydata keys)
   var cityNames = Object.keys(cityData);
 
   //randomly pick city for map
@@ -50,23 +63,8 @@ $(function() {
   //label buttons
   randomizeButtons(cityNames, currentCity);
 
-
-
-  $("button").on("click", function() {
-    //temp right/wrong code using...ugh...alerts
-    if ($(this).text() === currentCity) {
-      alert("correct!");
-    }
-    else {
-      alert("wrong!")
-    }
-  })
-
-});
-
-
-
-
+  return currentCity;
+}
 
 
 
@@ -111,4 +109,5 @@ function randomizeButtons(cityNames, currentCity) {
   $("#b5").text(cityNames[5]);
 
 }
+
 
