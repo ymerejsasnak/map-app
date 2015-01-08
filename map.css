@@ -16,8 +16,7 @@ body {
   width: 70%;
   margin: 2% auto;
 
-  border: 1px solid black;
-  border-radius: 5%;
+  
   box-shadow: 10px 10px 50px black;
 }
 
@@ -27,8 +26,8 @@ body {
 	height: 25%;
 	width: 50%;
 	margin: 0 auto;
-	background: linear-gradient(#EBE, #FEF);
-	border: 1px solid black;
+	background: linear-gradient(rgba(240,240,240,0.5), rgba(200,200,200,0.2));
+	
 	box-shadow: 1px 1px 10px black;
 }
 
@@ -37,4 +36,15 @@ button {
 	width: 25%;
 	margin: 4%;
 	float: left;
+	background: white;
+	border-radius: 50%;
+	box-shadow: 1px 1px 5px black;
+}
+
+button:hover {
+	background: lightblue;
+}
+
+button:focus {
+  outline: 0;
 }
