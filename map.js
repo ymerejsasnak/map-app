@@ -18,8 +18,9 @@ $(function() {
     "Las Vegas, NV": [36.2277, -115.2640]
 };
   
+  var unmatchedCities = Object.keys(cityData);
 
-  var currentCity = setupGame(cityData);
+  var currentCity = setupGame(cityData, unmatchedCities);
 
  
 
@@ -30,18 +31,17 @@ $(function() {
     if ($(this).text() === currentCity) {
       alert("correct!");
 
-      //load new map and buttons
-      currentCity = setupGame(cityData);
-      
+      //remove matched city from list and load new map and buttons
+      unmatchedCities.splice(unmatchedCities.indexOf(currentCity), 1);
+      currentCity = setupGame(cityData, unmatchedCities);
 
+      
     }
     else {
       alert("wrong!")
     }
 
   });
-
-
 
 });
 
@@ -50,12 +50,12 @@ $(function() {
 
 
 
-function setupGame(cityData) {
+function setupGame(cityData, unmatchedCities) {
    //create array of city names (taken from citydata keys)
   var cityNames = Object.keys(cityData);
 
   //randomly pick city for map
-  var currentCity = _.sample(cityNames);
+  var currentCity = _.sample(unmatchedCities);
 
   //create map
   var map = loadMap(cityData, currentCity);
