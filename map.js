@@ -18,28 +18,32 @@ $(function() {
     "Las Vegas, NV": [36.2277, -115.2640]
 };
   
-  var unmatchedCities = Object.keys(cityData);
+  var unaskedCities = Object.keys(cityData);
 
-  var currentCity = setupGame(cityData, unmatchedCities);
+  var currentCity = setupGame(cityData, unaskedCities);
 
  
 
 
   //check if button clicked is right or wrong
   $("button").on("click", function() {
-    //temp right/wrong code using...ugh...alerts
+    
     if ($(this).text() === currentCity) {
-      alert("correct!");
-
-      //remove matched city from list and load new map and buttons
-      unmatchedCities.splice(unmatchedCities.indexOf(currentCity), 1);
-      currentCity = setupGame(cityData, unmatchedCities);
-
-      
+      $("#correct").fadeIn(500).delay(200).fadeOut(500, function(){
+        //remove matched city from list and load new map and buttons
+        unaskedCities.splice(unaskedCities.indexOf(currentCity), 1);
+        currentCity = setupGame(cityData, unaskedCities);
+      });
     }
     else {
-      alert("wrong!")
+      $("#wrong").fadeIn(500).delay(200).fadeOut(500, function() {
+        //same as above...not very DRY!
+        unaskedCities.splice(unaskedCities.indexOf(currentCity), 1);
+        currentCity = setupGame(cityData, unaskedCities);
+      });
     }
+
+   
 
   });
 
@@ -50,12 +54,12 @@ $(function() {
 
 
 
-function setupGame(cityData, unmatchedCities) {
+function setupGame(cityData, unaskedCities) {
    //create array of city names (taken from citydata keys)
   var cityNames = Object.keys(cityData);
 
   //randomly pick city for map
-  var currentCity = _.sample(unmatchedCities);
+  var currentCity = _.sample(unaskedCities);
 
   //create map
   var map = loadMap(cityData, currentCity);
