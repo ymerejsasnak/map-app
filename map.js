@@ -15,8 +15,19 @@ $(function() {
     "Seattle, WA": [47.6205, -122.3509],
     "Denver, CO": [39.7618, -104.8806],
     "Boston, MA": [42.3320, -71.0202],
-    "Las Vegas, NV": [36.2277, -115.2640]
+    "Las Vegas, NV": [36.2277, -115.2640],
+    "San Antonio, TX": [29.4724, -98.5251],
+    "San Diego, CA": [32.8153, -117.1350],
+    "Dallas, TX": [32.7757, -96.7967],
+    "Indianapolis, IN": [39.7767, -86.1459],
+    "Jacksonville, FL": [30.3370, -81.6613],
+    "Columbus, OH": [39.9848, -82.9850],
+    "Charlotte, NC": [35.2087, -80.8307],
+    "Washington, DC": [38.9041, -77.0171],
+    "Baltimore, MD": [39.3002, -76.6105],
+    "Louisville, KY": [38.1781, -85.6667],
 };
+
   
   var unaskedCities = Object.keys(cityData);
   var totalCities = unaskedCities.length;
