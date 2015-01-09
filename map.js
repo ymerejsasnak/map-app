@@ -19,9 +19,11 @@ $(function() {
 };
   
   var unaskedCities = Object.keys(cityData);
+  var totalCities = unaskedCities.length;
+  var currentCity = setupCities(cityData, unaskedCities, totalCities);
 
-  var currentCity = setupGame(cityData, unaskedCities);
-
+  var correct = 0;
+  
  
 
 
@@ -29,21 +31,27 @@ $(function() {
   $("button").on("click", function() {
     
     if ($(this).text() === currentCity) {
-      $("#correct").fadeIn(500).delay(200).fadeOut(500, function(){
-        //remove matched city from list and load new map and buttons
-        unaskedCities.splice(unaskedCities.indexOf(currentCity), 1);
-        currentCity = setupGame(cityData, unaskedCities);
-      });
-    }
-    else {
-      $("#wrong").fadeIn(500).delay(200).fadeOut(500, function() {
-        //same as above...not very DRY!
-        unaskedCities.splice(unaskedCities.indexOf(currentCity), 1);
-        currentCity = setupGame(cityData, unaskedCities);
-      });
+      correct += 1;
+      $("#correct").fadeIn(500).delay(200).fadeOut(500);
     }
 
-   
+    else {
+      $("#wrong").fadeIn(500).delay(200).fadeOut(500);
+    }
+    
+    //remove matched city from list and check if there's any left
+    //then load new map and buttons or win message (after timeout to wait for jQ effects above)
+    setTimeout(function() {
+      unaskedCities.splice(unaskedCities.indexOf(currentCity), 1);
+      if (unaskedCities.length > 0) {
+        currentCity = setupCities(cityData, unaskedCities, totalCities);
+      }
+      else {
+        var winMessage = $("#win");
+        winMessage.text("You got " + correct + " of " + totalCities + " right!");
+        winMessage.fadeIn(1000);
+      }
+    }, 1000);
 
   });
 
@@ -54,7 +62,7 @@ $(function() {
 
 
 
-function setupGame(cityData, unaskedCities) {
+function setupCities(cityData, unaskedCities, totalCities) {
    //create array of city names (taken from citydata keys)
   var cityNames = Object.keys(cityData);
 
@@ -65,7 +73,7 @@ function setupGame(cityData, unaskedCities) {
   var map = loadMap(cityData, currentCity);
 
   //label buttons
-  randomizeButtons(cityNames, currentCity);
+  randomizeButtons(cityNames, currentCity, totalCities);
 
   return currentCity;
 }
@@ -93,9 +101,7 @@ function loadMap(cityData, currentCity) {
 
 
 
-function randomizeButtons(cityNames, currentCity) {
-  
-  var totalCities = cityNames.length;
+function randomizeButtons(cityNames, currentCity, totalCities) {
   
   //first cut answer from list of city names then shuffle remaining
   cityNames.splice(cityNames.indexOf(currentCity), 1);
